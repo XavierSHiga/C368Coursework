@@ -1,8 +1,8 @@
 # C368Coursework
 Coursework for C368 Foundations of SRE
-The files within myContributionsToApp/ are files that I directly worked on for the application that we were working with in our team environment.
-The files within myContributionsToInfrastructure/ are files that I directly worked on, and files I debugged/used, for the infrastructure of our team's application.
-The files within PythonActivites/ are just some python activities that we worked on during the training, pretty simple stuff.
+- The files within myContributionsToApp/ are files that I directly worked on for the application that we were working with in our team environment.
+- The files within myContributionsToInfrastructure/ are files that I directly worked on, and files I debugged/used, for the infrastructure of our team's application.
+- The files within PythonActivites/ are just some python activities that we worked on during the training, pretty simple stuff.
 
 
 myContributionsToApp/ includes a file within githubActionWorkflow/ called testflow.yaml.
