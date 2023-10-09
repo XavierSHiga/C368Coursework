@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+  labels:
+    app: orderbook
+    app.kubernetes.io/component: orderbookcache
+    app.kubernetes.io/name: orderbook
+  name: orderbookcache
+  namespace: c368-team03-dev
+spec:
+  ports:
+  - name: "cache"
+    port: 6379
+    targetPort: 6379
+  selector:
+    name: orderbookcache
+status:
+  loadBalancer: {}

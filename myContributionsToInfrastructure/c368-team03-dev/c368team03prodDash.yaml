@@ -1,0 +1,1911 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: c368team03proddash
+  namespace: prometheus
+  labels:
+    grafana_dashboard: "1"
+data:
+  c368team03proddash.json: | 
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": {
+              "type": "grafana",
+              "uid": "-- Grafana --"
+            },
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": 115,
+      "links": [],
+      "liveNow": false,
+      "panels": [
+        {
+          "collapsed": true,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 0
+          },
+          "id": 2,
+          "panels": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "dashed"
+                    }
+                  },
+                  "mappings": [],
+                  "max": 110,
+                  "min": 70,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": null
+                      },
+                      {
+                        "color": "red",
+                        "value": 98
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 8,
+                "w": 7,
+                "x": 0,
+                "y": 1
+              },
+              "id": 4,
+              "options": {
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "mode": "single",
+                  "sort": "none"
+                }
+              },
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "sum(rate(http_requests_total{ \r\n  namespace=\"c368-team03-prod\",\r\n  handler!~\"(/metrics)\",\r\n  status=\"2xx\" \r\n}[1m]))\r\n/\r\nsum(rate(http_requests_total{ \r\n  namespace=\"c368-team03-prod\",\r\n  handler!~\"(/metrics)\",\r\n  status!=\"4xx\" \r\n}[1m])) * 100",
+                  "legendFormat": "{{available}}",
+                  "range": true,
+                  "refId": "A"
+                }
+              ],
+              "title": "Site Availability",
+              "type": "timeseries"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "mappings": [],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": null
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 4,
+                "w": 4,
+                "x": 7,
+                "y": 1
+              },
+              "id": 6,
+              "options": {
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "mode": "single",
+                  "sort": "none"
+                }
+              },
+              "pluginVersion": "9.3.1",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "mysql_up {namespace=\"c368-team03-prod\" }",
+                  "legendFormat": "mysql",
+                  "range": true,
+                  "refId": "A"
+                }
+              ],
+              "title": "MySQL Availability",
+              "type": "timeseries"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "mappings": [],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": null
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 8,
+                "w": 13,
+                "x": 11,
+                "y": 1
+              },
+              "id": 58,
+              "options": {
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "mode": "single",
+                  "sort": "none"
+                }
+              },
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "sum\r\n  (rate(\r\n    http_request_duration_seconds_bucket{\r\n      le=\"1.0\",\r\n      namespace=\"c368-team03-prod\"\r\n    }[1w])\r\n  )\r\n  / # divide by\r\nsum # all requests\r\n  (rate(\r\n    http_request_duration_seconds_bucket{\r\n      le=\"+Inf\",# infinity, or all request\r\n      namespace=\"c368-team03-prod\"\r\n    } [1w])\r\n  )  * 100 \r\n",
+                  "legendFormat": "{{percent request}}",
+                  "range": true,
+                  "refId": "A"
+                }
+              ],
+              "title": "Percentage of All Request Faster than 1 second Per Week",
+              "type": "timeseries"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "lineInterpolation": "linear",
+                    "lineStyle": {
+                      "fill": "solid"
+                    },
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "dashed"
+                    }
+                  },
+                  "mappings": [],
+                  "max": 25,
+                  "min": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "dark-red",
+                        "value": null
+                      },
+                      {
+                        "color": "dark-red",
+                        "value": 5
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 4,
+                "w": 4,
+                "x": 7,
+                "y": 5
+              },
+              "id": 64,
+              "options": {
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "mode": "single",
+                  "sort": "none"
+                }
+              },
+              "pluginVersion": "9.3.1",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "sum(rate(http_requests_total{ \r\n  namespace=\"c368-team03-prod\",\r\n  handler!~\"(metrics|docs)\", # exclude these endpoints\r\n  status=\"4xx\"\r\n}[1m]))\r\n/  # divide by\r\nsum(rate(http_requests_total{ \r\n  namespace=\"c368-team03-prod\",\r\n  handler!~\"(metrics|docs)\", # exclude these endpoints\r\n}[1m])) * 100",
+                  "legendFormat": "4xx",
+                  "range": true,
+                  "refId": "A"
+                }
+              ],
+              "title": "Percentage of 4xx / Minute",
+              "type": "timeseries"
+            }
+          ],
+          "title": "SLO",
+          "type": "row"
+        },
+        {
+          "collapsed": true,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 10,
+          "panels": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "drawStyle": "line",
+                    "fillOpacity": 4,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "lineInterpolation": "smooth",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "dashed"
+                    }
+                  },
+                  "mappings": [],
+                  "max": 0.11,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": null
+                      },
+                      {
+                        "color": "red",
+                        "value": 0.1
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 8,
+                "w": 7,
+                "x": 0,
+                "y": 2
+              },
+              "id": 12,
+              "options": {
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "mode": "single",
+                  "sort": "none"
+                }
+              },
+              "pluginVersion": "9.3.1",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=\"c368-team03-prod\"}[$__rate_interval])) ",
+                  "legendFormat": "Total",
+                  "range": true,
+                  "refId": "A"
+                },
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "rate(container_cpu_usage_seconds_total{namespace=\"c368-team03-prod\", container=\"currencyapi\"}[$__rate_interval])",
+                  "hide": false,
+                  "legendFormat": "{{container}}",
+                  "range": true,
+                  "refId": "B"
+                },
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "rate(container_cpu_usage_seconds_total{namespace=\"c368-team03-prod\", container=\"orderbookapi\"}[$__rate_interval])",
+                  "hide": false,
+                  "legendFormat": "{{container}}",
+                  "range": true,
+                  "refId": "C"
+                },
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "rate(container_cpu_usage_seconds_total{namespace=\"c368-team03-prod\", container=\"orderbookfe\"}[$__rate_interval])",
+                  "hide": false,
+                  "legendFormat": "{{container}}",
+                  "range": true,
+                  "refId": "D"
+                },
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "rate(container_cpu_usage_seconds_total{namespace=\"c368-team03-prod\", container=\"orderbookdb\"}[$__rate_interval])",
+                  "hide": false,
+                  "legendFormat": "{{container}}",
+                  "range": true,
+                  "refId": "E"
+                },
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "rate(container_cpu_usage_seconds_total{namespace=\"c368-team03-prod\", container=\"mysqld-exporter\"}[$__rate_interval])",
+                  "hide": false,
+                  "legendFormat": "{{container}}",
+                  "range": true,
+                  "refId": "F"
+                }
+              ],
+              "title": "CPU Usage",
+              "type": "timeseries"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisCenteredZero": false,
+                    "axisColorMode": "series",
+                    "axisGridShow": false,
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "drawStyle": "line",
+                    "fillOpacity": 7,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "lineInterpolation": "stepAfter",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "spanNulls": true,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "mappings": [],
+                  "min": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": null
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  }
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "{__name__=\"container_threads\", endpoint=\"https-metrics\", id=\"/kubepods.slice/kubepods-burstable.slice/kubepods-burstable-pod0993d8be_8390_4d59_8b40_afd26a34eb48.slice\", instance=\"172.16.42.35:10250\", job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", namespace=\"c368-team03-dev\", node=\"ip-172-16-42-35.ec2.internal\", pod=\"orderbookdb-7b96ccdd79-nxxzf\", service=\"prometheus-kube-prometheus-kubelet\"}"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "semi-dark-purple",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "gridPos": {
+                "h": 8,
+                "w": 7,
+                "x": 7,
+                "y": 2
+              },
+              "id": 14,
+              "options": {
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "right",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "mode": "single",
+                  "sort": "none"
+                }
+              },
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "container_threads{namespace=\"c368-team03-prod\", container=\"currencyapi\"} ",
+                  "legendFormat": "{{container}}",
+                  "range": true,
+                  "refId": "A"
+                },
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "container_threads{namespace=\"c368-team03-prod\", container=\"orderbookapi\"} ",
+                  "hide": false,
+                  "legendFormat": "{{container}}",
+                  "range": true,
+                  "refId": "B"
+                },
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "container_threads{namespace=\"c368-team03-prod\", container=\"orderbookdb\"} ",
+                  "hide": false,
+                  "legendFormat": "{{container}}",
+                  "range": true,
+                  "refId": "C"
+                },
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "container_threads{namespace=\"c368-team03-prod\", container=\"orderbookfe\"} ",
+                  "hide": false,
+                  "legendFormat": "{{container}}",
+                  "range": true,
+                  "refId": "D"
+                },
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "container_threads{namespace=\"c368-team03-prod\", container=\"mysqld-exporter\"} ",
+                  "hide": false,
+                  "legendFormat": "{{container}}",
+                  "range": true,
+                  "refId": "E"
+                }
+              ],
+              "title": "Thread Count",
+              "type": "timeseries"
+            }
+          ],
+          "title": "CPU Status",
+          "type": "row"
+        },
+        {
+          "collapsed": true,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 2
+          },
+          "id": 16,
+          "panels": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "mappings": [],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": null
+                      },
+                      {
+                        "color": "red",
+                        "value": 100
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 5,
+                "w": 5,
+                "x": 0,
+                "y": 3
+              },
+              "id": 18,
+              "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "textMode": "auto"
+              },
+              "pluginVersion": "9.3.1",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "sum(default_jenkins_builds_failed_build_count_total{jenkins_job=\"c368team03-promote\"} + default_jenkins_builds_success_build_count_total{jenkins_job=\"c368team03-promote\"})",
+                  "legendFormat": "Total",
+                  "range": true,
+                  "refId": "A"
+                }
+              ],
+              "title": "Number of Builds",
+              "type": "stat"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "mappings": [],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": null
+                      },
+                      {
+                        "color": "#EAB839",
+                        "value": 80
+                      },
+                      {
+                        "color": "red",
+                        "value": 100
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 5,
+                "w": 5,
+                "x": 5,
+                "y": 3
+              },
+              "id": 20,
+              "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "textMode": "auto"
+              },
+              "pluginVersion": "9.3.1",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "default_jenkins_builds_success_build_count_total{jenkins_job=\"c368team03-promote\"}",
+                  "legendFormat": "Total",
+                  "range": true,
+                  "refId": "A"
+                }
+              ],
+              "title": "Number of Builds Succeeded",
+              "type": "stat"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "mappings": [],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "orange",
+                        "value": null
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 10,
+                "y": 3
+              },
+              "id": 22,
+              "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "textMode": "auto"
+              },
+              "pluginVersion": "9.3.1",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "default_jenkins_builds_failed_build_count_total{jenkins_job=\"c368team03-promote\"}",
+                  "legendFormat": "Total",
+                  "range": true,
+                  "refId": "A"
+                }
+              ],
+              "title": "Number of Builds Failed",
+              "type": "stat"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "mappings": [],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "transparent",
+                        "value": null
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      },
+                      {
+                        "color": "#EAB839",
+                        "value": 90
+                      },
+                      {
+                        "color": "green",
+                        "value": 95
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 5,
+                "w": 5,
+                "x": 0,
+                "y": 8
+              },
+              "id": 24,
+              "options": {
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showThresholdLabels": false,
+                "showThresholdMarkers": true
+              },
+              "pluginVersion": "9.3.1",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "default_jenkins_builds_health_score{jenkins_job=\"c368team03-promote\"}",
+                  "legendFormat": "__auto",
+                  "range": true,
+                  "refId": "A"
+                }
+              ],
+              "title": "Jenkins Build Health Score",
+              "type": "gauge"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "mappings": [],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "red",
+                        "value": null
+                      },
+                      {
+                        "color": "yellow",
+                        "value": 75
+                      },
+                      {
+                        "color": "green",
+                        "value": 90
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 5,
+                "w": 5,
+                "x": 5,
+                "y": 8
+              },
+              "id": 26,
+              "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "textMode": "auto"
+              },
+              "pluginVersion": "9.3.1",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "(sum(default_jenkins_builds_success_build_count_total{jenkins_job=\"c368team03-promote\"}) / sum(default_jenkins_builds_failed_build_count_total{jenkins_job=\"c368team03-promote\"} + default_jenkins_builds_success_build_count_total{jenkins_job=\"c368team03-promote\"})) * 100",
+                  "legendFormat": "Total",
+                  "range": true,
+                  "refId": "A"
+                }
+              ],
+              "title": "% of Builds Succeeded",
+              "type": "stat"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "mappings": [],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": null
+                      },
+                      {
+                        "color": "yellow",
+                        "value": 15
+                      },
+                      {
+                        "color": "red",
+                        "value": 25
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 10,
+                "y": 8
+              },
+              "id": 28,
+              "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "textMode": "auto"
+              },
+              "pluginVersion": "9.3.1",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "(sum(default_jenkins_builds_failed_build_count_total{jenkins_job=\"c368team03-promote\"}) / sum(default_jenkins_builds_failed_build_count_total{jenkins_job=\"c368team03-promote\"} + default_jenkins_builds_success_build_count_total{jenkins_job=\"c368team03-promote\"})) * 100",
+                  "legendFormat": "Total",
+                  "range": true,
+                  "refId": "A"
+                }
+              ],
+              "title": "% of Builds Failed",
+              "type": "stat"
+            }
+          ],
+          "title": "Jenkins",
+          "type": "row"
+        },
+        {
+          "collapsed": true,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 3
+          },
+          "id": 30,
+          "panels": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "mappings": [],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": null
+                      },
+                      {
+                        "color": "red",
+                        "value": 0.5
+                      },
+                      {
+                        "color": "green",
+                        "value": 1
+                      },
+                      {
+                        "color": "orange",
+                        "value": 3
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 8,
+                "w": 5,
+                "x": 0,
+                "y": 4
+              },
+              "id": 32,
+              "options": {
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showThresholdLabels": false,
+                "showThresholdMarkers": true
+              },
+              "pluginVersion": "9.3.1",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "kube_deployment_status_replicas_updated{namespace=\"c368-team03-prod\"}",
+                  "legendFormat": "{{deployment}}",
+                  "range": true,
+                  "refId": "A"
+                }
+              ],
+              "title": "Replicas Updated",
+              "type": "gauge"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "mappings": [],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "transparent",
+                        "value": null
+                      },
+                      {
+                        "color": "red",
+                        "value": 0
+                      },
+                      {
+                        "color": "green",
+                        "value": 1
+                      },
+                      {
+                        "color": "orange",
+                        "value": 3
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 7,
+                "w": 6,
+                "x": 5,
+                "y": 4
+              },
+              "id": 34,
+              "options": {
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showThresholdLabels": false,
+                "showThresholdMarkers": true
+              },
+              "pluginVersion": "9.3.1",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "kube_deployment_status_replicas_available{namespace=\"c368-team03-prod\"}",
+                  "legendFormat": "{{deployment}}",
+                  "range": true,
+                  "refId": "A"
+                }
+              ],
+              "title": "Replicas Available",
+              "type": "gauge"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "mappings": [],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": null
+                      },
+                      {
+                        "color": "red",
+                        "value": 2
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 7,
+                "w": 6,
+                "x": 12,
+                "y": 4
+              },
+              "id": 36,
+              "options": {
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showThresholdLabels": false,
+                "showThresholdMarkers": true
+              },
+              "pluginVersion": "9.3.1",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "kube_deployment_status_replicas_unavailable{namespace=\"c368-team03-prod\"}",
+                  "legendFormat": "{{deployment}}",
+                  "range": true,
+                  "refId": "A"
+                }
+              ],
+              "title": "Replicas Unavailable",
+              "type": "gauge"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "mappings": [],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "transparent",
+                        "value": null
+                      },
+                      {
+                        "color": "red",
+                        "value": 0
+                      },
+                      {
+                        "color": "green",
+                        "value": 1
+                      },
+                      {
+                        "color": "yellow",
+                        "value": 3
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 8,
+                "w": 5,
+                "x": 18,
+                "y": 4
+              },
+              "id": 38,
+              "options": {
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showThresholdLabels": false,
+                "showThresholdMarkers": true
+              },
+              "pluginVersion": "9.3.1",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "kube_deployment_status_replicas_ready{namespace=\"c368-team03-prod\"}",
+                  "legendFormat": "{{deployment}}",
+                  "range": true,
+                  "refId": "A"
+                }
+              ],
+              "title": "Replicas Ready",
+              "type": "gauge"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "mappings": [],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": null
+                      },
+                      {
+                        "color": "#EAB839",
+                        "value": 70
+                      },
+                      {
+                        "color": "red",
+                        "value": 85
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 7,
+                "w": 13,
+                "x": 5,
+                "y": 11
+              },
+              "id": 40,
+              "options": {
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showThresholdLabels": false,
+                "showThresholdMarkers": true
+              },
+              "pluginVersion": "9.3.1",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                  },
+                  "editorMode": "code",
+                  "expr": "kube_deployment_status_replicas_available{namespace=\"c368-team03-prod\"} ",
+                  "legendFormat": "{{deployment}}",
+                  "range": true,
+                  "refId": "A"
+                }
+              ],
+              "title": "Replicas Per Deployment",
+              "type": "gauge"
+            }
+          ],
+          "title": "Replica Gauges",
+          "type": "row"
+        },
+        {
+          "collapsed": true,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 4
+          },
+          "id": 42,
+          "panels": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "gridPos": {
+                "h": 5,
+                "w": 12,
+                "x": 0,
+                "y": 5
+              },
+              "id": 44,
+              "options": {
+                "dedupStrategy": "none",
+                "enableLogDetails": true,
+                "prettifyLogMessage": false,
+                "showCommonLabels": false,
+                "showLabels": false,
+                "showTime": false,
+                "sortOrder": "Descending",
+                "wrapLogMessage": false
+              },
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "loki",
+                    "uid": "P8E80F9AEF21F6940"
+                  },
+                  "editorMode": "code",
+                  "expr": "{namespace=\"c368-team03-prod\", container=\"orderbookapi\"} !~ `metrics`",
+                  "queryType": "range",
+                  "refId": "A"
+                }
+              ],
+              "title": "Orderbookapi Logs (minus metrics)",
+              "type": "logs"
+            },
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "gridPos": {
+                "h": 5,
+                "w": 7,
+                "x": 12,
+                "y": 5
+              },
+              "id": 46,
+              "options": {
+                "dedupStrategy": "none",
+                "enableLogDetails": true,
+                "prettifyLogMessage": false,
+                "showCommonLabels": false,
+                "showLabels": false,
+                "showTime": false,
+                "sortOrder": "Descending",
+                "wrapLogMessage": false
+              },
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "loki",
+                    "uid": "P8E80F9AEF21F6940"
+                  },
+                  "editorMode": "code",
+                  "expr": "{namespace=\"c368-team03-prod\", container=\"orderbookdb\"} ",
+                  "queryType": "range",
+                  "refId": "A"
+                }
+              ],
+              "title": "Orderbookdb Logs (minus metrics)",
+              "type": "logs"
+            },
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 6,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "always",
+                    "spanNulls": true,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "mappings": [],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": null
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  }
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "error"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "red",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "info"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "green",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "gridPos": {
+                "h": 9,
+                "w": 5,
+                "x": 19,
+                "y": 5
+              },
+              "id": 48,
+              "options": {
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "mode": "single",
+                  "sort": "none"
+                }
+              },
+              "pluginVersion": "9.3.1",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "loki",
+                    "uid": "P8E80F9AEF21F6940"
+                  },
+                  "editorMode": "code",
+                  "expr": "sum(count_over_time({job=\"flux-system/kustomize-controller\"} |~ `c368-team03-prod` | regexp `(\"level\":.)+(?P<level>[a-z_]+)*` [$__interval])) by (level)",
+                  "legendFormat": "{{level}}",
+                  "queryType": "range",
+                  "refId": "A"
+                }
+              ],
+              "title": "Flux-Kustomize Log Types",
+              "type": "timeseries"
+            },
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "gridPos": {
+                "h": 4,
+                "w": 12,
+                "x": 0,
+                "y": 10
+              },
+              "id": 50,
+              "options": {
+                "dedupStrategy": "none",
+                "enableLogDetails": true,
+                "prettifyLogMessage": false,
+                "showCommonLabels": false,
+                "showLabels": false,
+                "showTime": false,
+                "sortOrder": "Descending",
+                "wrapLogMessage": false
+              },
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "loki",
+                    "uid": "P8E80F9AEF21F6940"
+                  },
+                  "editorMode": "code",
+                  "expr": "{namespace=\"c368-team03-prod\"} |~ `metrics`",
+                  "queryType": "range",
+                  "refId": "A"
+                }
+              ],
+              "title": "Metrics Logs",
+              "type": "logs"
+            },
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "gridPos": {
+                "h": 4,
+                "w": 7,
+                "x": 12,
+                "y": 10
+              },
+              "id": 52,
+              "options": {
+                "dedupStrategy": "none",
+                "enableLogDetails": true,
+                "prettifyLogMessage": false,
+                "showCommonLabels": false,
+                "showLabels": false,
+                "showTime": false,
+                "sortOrder": "Descending",
+                "wrapLogMessage": false
+              },
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "loki",
+                    "uid": "P8E80F9AEF21F6940"
+                  },
+                  "editorMode": "code",
+                  "expr": "{namespace=\"c368-team03-prod\", container=\"orderbookfe\"}",
+                  "queryType": "range",
+                  "refId": "A"
+                }
+              ],
+              "title": "Orderbookfe Logs",
+              "type": "logs"
+            },
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "gridPos": {
+                "h": 5,
+                "w": 24,
+                "x": 0,
+                "y": 14
+              },
+              "id": 54,
+              "options": {
+                "dedupStrategy": "none",
+                "enableLogDetails": true,
+                "prettifyLogMessage": false,
+                "showCommonLabels": false,
+                "showLabels": false,
+                "showTime": false,
+                "sortOrder": "Descending",
+                "wrapLogMessage": false
+              },
+              "pluginVersion": "9.3.1",
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "loki",
+                    "uid": "P8E80F9AEF21F6940"
+                  },
+                  "editorMode": "code",
+                  "expr": "{job=\"flux-system/kustomize-controller\"} |~ `c368-team03-prod` ",
+                  "legendFormat": "{{level}}",
+                  "queryType": "range",
+                  "refId": "A"
+                }
+              ],
+              "title": "Flux Logs",
+              "type": "logs"
+            },
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "gridPos": {
+                "h": 5,
+                "w": 24,
+                "x": 0,
+                "y": 19
+              },
+              "id": 56,
+              "options": {
+                "dedupStrategy": "none",
+                "enableLogDetails": true,
+                "prettifyLogMessage": false,
+                "showCommonLabels": false,
+                "showLabels": false,
+                "showTime": false,
+                "sortOrder": "Descending",
+                "wrapLogMessage": false
+              },
+              "targets": [
+                {
+                  "datasource": {
+                    "type": "loki",
+                    "uid": "P8E80F9AEF21F6940"
+                  },
+                  "editorMode": "code",
+                  "expr": "{namespace=\"c368-team03-prod\", container=\"mysqld-exporter\"} ",
+                  "queryType": "range",
+                  "refId": "A"
+                }
+              ],
+              "title": "mysqld-exporter Logs",
+              "type": "logs"
+            }
+          ],
+          "title": "Logs",
+          "type": "row"
+        }
+      ],
+      "schemaVersion": 37,
+      "style": "dark",
+      "tags": [],
+      "templating": {
+        "list": []
+      },
+      "time": {
+        "from": "now-15m",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "",
+      "title": "c368-team03-prod-dash-yaml",
+      "uid": "BupaIJKdehSk",
+      "version": 20,
+      "weekStart": ""
+    }

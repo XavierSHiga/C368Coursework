@@ -1,0 +1,14 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: c368team03proddb
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: production-support-course
+  filterTags:
+    pattern: '^c368team03db-prod-(?P<ts>.*)'
+    extract: '$ts'
+  policy:
+     numerical:
+      order: asc

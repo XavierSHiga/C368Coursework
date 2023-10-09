@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: mysqld-exporter
+    app.kubernetes.io/name: orderbook
+  name: mysqld-exporter
+  namespace: c368-team03-prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: mysqld-exporter
+      app.kubernetes.io/name: orderbook
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: mysqld-exporter
+        app.kubernetes.io/name: orderbook
+    spec:
+      containers:
+        - env:
+            - name: DATA_SOURCE_NAME
+              value: "root:wiley123@(orderbookdb:3306)/"
+          image: public.ecr.aws/bitnami/mysqld-exporter:0.14.0
+          name: mysqld-exporter
+          imagePullPolicy: Always
+          ports:
+            - name: http-prom
+              containerPort: 9104
+          resources:
+            limits:
+              cpu: 20m
+              memory: 56Mi
+            requests:
+              cpu: 10m
+              memory: 10Mi
+      restartPolicy: Always

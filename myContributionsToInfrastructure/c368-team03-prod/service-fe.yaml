@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+  labels:
+    app: orderbook
+    app.kubernetes.io/component: orderbookfe
+    app.kubernetes.io/name: orderbook
+  name: orderbookfe
+  namespace: c368-team03-prod
+spec:
+  ports:
+  - name: "http"
+    port: 80
+    targetPort: 80
+  - name: "https"
+    port: 443
+    targetPort: 80
+  selector:
+    name: orderbookfe
+  type: LoadBalancer
+status:
+  loadBalancer: {}

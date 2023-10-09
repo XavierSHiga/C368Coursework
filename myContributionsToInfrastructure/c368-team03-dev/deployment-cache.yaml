@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: orderbook
+  name: orderbookcache
+  namespace: c368-team03-dev
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      name: orderbookcache
+  template:
+    metadata:
+      labels:
+        name: orderbookcache
+    spec:
+      containers:
+      - env:
+        image: "public.ecr.aws/docker/library/redis:6.2"
+        name: orderbookcache
+        imagePullPolicy: Always
+        ports:
+        - name: cache
+          containerPort: 6379
+        resources:
+          limits:
+            cpu: 100m
+            memory: 512Mi
+          requests:
+            cpu: 50m
+            memory: 300Mi
+      restartPolicy: Always

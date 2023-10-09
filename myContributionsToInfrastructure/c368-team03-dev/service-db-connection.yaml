@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: orderbookdb-lb
+  namespace: c368-team03-dev
+  labels:
+    test: test
+    app: orderbook
+    app.kubernetes.io/component: orderbookdb
+    app.kubernetes.io/name: orderbook
+spec:
+  type: LoadBalancer
+  ports:
+  - name: mysql
+    port: 3306
+    targetPort: 3306
+  selector:
+    name: orderbookdb

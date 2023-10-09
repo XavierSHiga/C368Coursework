@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: api-exporter
+  namespace: c368-team03-prod
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: orderbookapi
+      app.kubernetes.io/name: orderbook
+  endpoints:
+  - port: api
